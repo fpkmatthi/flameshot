@@ -31,7 +31,7 @@ ScreenshotSaver::ScreenshotSaver() {
 void ScreenshotSaver::saveToClipboard(const QPixmap &capture) {
     SystemNotification().sendMessage(
                 QObject::tr("Capture saved to clipboard"));
-    QApplication::clipboard()->setPixmap(capture);
+    //QApplication::clipboard()->setPixmap(capture);
 }
 
 bool ScreenshotSaver::saveToFilesystem(const QPixmap &capture,
@@ -46,6 +46,7 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap &capture,
     if (ok) {
         ConfigHandler().setSavePath(path);
         saveMessage = QObject::tr("Capture saved as ") + completePath;
+        QApplication::clipboard()=>setText(completePath);
     } else {
         saveMessage = QObject::tr("Error trying to save as ") + completePath;
         notificationPath = "";
